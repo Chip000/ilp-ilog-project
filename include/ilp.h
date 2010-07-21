@@ -1,9 +1,9 @@
 /*
- * cp.h: definitions for constraint programming functions
+ * ilp.h: definitions for integer linear programming functions
  */
 
-#ifndef HAVE_CP_H
-#define HAVE_CP_H
+#ifndef HAVE_ILP_H
+#define HAVE_ILP_H
 
 #include <ilcplex/ilocplex.h>
 #include <iostream>
@@ -18,15 +18,15 @@
 #define SUCCESS 0
 #define FAILURE -1
 
-class CP {
+class ILP {
 	int *perm;
 	int perm_size;
 	const char *btype;
  public:
 	/* Constructor */
-	CP(int *P, int n, const char *bt);
+	ILP(int *P, int n, const char *bt);
 	/* Destructor */
-	~CP();
+	~ILP();
 
 	/* get_bound: Returns the model for the model bt. */
 	void get_bound(int P[], int n, const char *bt, 
@@ -39,9 +39,15 @@ class CP {
 	 * permutation. */
 	int is_identity(int P[], int n);
 
+	/* trans_dist */
+	int trans_dist();
+	int trans_dist(int P[], int n, const char *bt);
+
 	/* rev_dist */
+	int rev_dist();
 	int rev_dist(int P[], int n, const char *bt);
+
 };
 
 #endif
-/* ! HAVE_CP_H */
+/* ! HAVE_ILP_H */

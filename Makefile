@@ -6,12 +6,12 @@ VPATH=./src
 CONCERTDIR = /usr/local/ilog/concert29
 CPLEXDIR = /usr/local/ilog/cplex121
 
-TARGET=clp_dist
+TARGET=ilp_dist
 
-_DEPS = cp.h
+_DEPS = ilp.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o cp.o
+_OBJ = main.o ilp.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 CFLAGS=-DIL_STD -O -DNDEBUG -I$(IDIR) -I$(CPLEXDIR)/include	\

@@ -1,10 +1,12 @@
 #include <iostream>
 #include <sstream>
-#include "../include/cp.h"
+#include "../include/ilp.h"
 
 using namespace std;
 
-#define DEBUG 1
+#define TRA "trans"
+#define REV "rev"
+#define T_R "trans_rev"
 
 /*
  * usage: prints the usage message
@@ -87,14 +89,29 @@ int main(int argc, const char *argv[])
 
 	perm = perm2int(char_perm, perm_size);
 
-	CP prob(perm, perm_size, btype);
+	/* Creating the object problem */
+	ILP prob(perm, perm_size, btype);
 
 #if DEBUG == 1
 	cout << ">> DEBUG: prob created " << endl; 
 #endif
 
 	cout << endl;
-	prob.rev_dist(perm, perm_size, btype);
+
+	if (strcmp(TRA, model) == 0) {
+		prob.trans_dist();
+	}
+	else if (strcmp(REV, model) == 0) {
+		prob.rev_dist();
+	}
+	else if (strcmp(T_R, model) == 0) {
+		/* TODO */
+	}
+	else {
+		cerr << ">> ERROR: Model not found" << endl << endl;
+		usage(argv[0]);
+	}
+
 	cout << endl;
 
 	/* desallocate the memory */
