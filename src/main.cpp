@@ -99,13 +99,21 @@ int main(int argc, const char *argv[])
 	cout << endl;
 
 	if (strcmp(TRA, model) == 0) {
-		prob.trans_dist();
+		if (prob.trans_dist() == 0) {
+			cout << "Optimal Value: 0" << endl;
+		}
 	}
 	else if (strcmp(REV, model) == 0) {
-		prob.rev_dist();
+		if (prob.rev_dist() == 0) {
+			cout << "Optimal Value: 0" << endl;
+		}
+
 	}
 	else if (strcmp(T_R, model) == 0) {
-		/* TODO */
+		if (prob.trans_rev_dist() == 0) {
+			cout << "Optimal Value: 0" << endl;
+		}
+
 	}
 	else {
 		cerr << ">> ERROR: Model not found" << endl << endl;

@@ -47,6 +47,10 @@ class ILP {
 	int rev_dist();
 	int rev_dist(int P[], int n, const char *bt);
 
+	/* trans_rev_dist */
+	int trans_rev_dist();
+	int trans_rev_dist(int P[], int n, const char *bt);
+
 };
 
 #endif
