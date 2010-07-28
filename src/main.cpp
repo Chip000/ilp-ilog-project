@@ -1,5 +1,7 @@
 #include <iostream>
 #include <sstream>
+#include <ctime>
+#include <cstdio>
 #include "../include/ilp.h"
 
 using namespace std;
@@ -28,6 +30,7 @@ void usage(const char name[])
 	cout << "* def    - default bound.\n";
 	cout << "* rev_br - reversal breakpoint bound.\n";
 	cout << "* tra_br - transposition breakpoint bound.\n";
+	cout << "* t_r_br - transposition+reversal breakpoint bound.\n";
 	cout << "\n";
 
 	cout << "- p is the given permutation.\n";
@@ -77,6 +80,12 @@ int main(int argc, const char *argv[])
 	const char *char_perm = argv[3];
 	int *perm;
 	int perm_size;
+	int ret;
+
+	clock_t c_begin;
+	clock_t c_end;
+
+	c_begin = clock();
 
 	if (argc < 4) {
 		usage(argv[0]);
@@ -92,33 +101,32 @@ int main(int argc, const char *argv[])
 	/* Creating the object problem */
 	ILP prob(perm, perm_size, btype);
 
-#if DEBUG == 1
-	cout << ">> DEBUG: prob created " << endl; 
-#endif
-
 	cout << endl;
 
+	ret = -1;
+
 	if (strcmp(TRA, model) == 0) {
-		if (prob.trans_dist() == 0) {
-			cout << "Optimal Value: 0" << endl;
-		}
+		ret = prob.trans_dist();
 	}
 	else if (strcmp(REV, model) == 0) {
-		if (prob.rev_dist() == 0) {
-			cout << "Optimal Value: 0" << endl;
-		}
-
+		ret = prob.rev_dist();
 	}
 	else if (strcmp(T_R, model) == 0) {
-		if (prob.trans_rev_dist() == 0) {
-			cout << "Optimal Value: 0" << endl;
-		}
-
+		ret = prob.trans_rev_dist();
 	}
 	else {
 		cerr << ">> ERROR: Model not found" << endl << endl;
 		usage(argv[0]);
 	}
+
+	if (ret == 0) {
+		cout << "Optimal Value: 0" << endl;
+	}
+
+	c_end = clock();
+
+	fprintf(stdout, "Total Time: %.4f\n",
+		(double) (c_end - c_begin) / CLOCKS_PER_SEC);
 
 	cout << endl;
 

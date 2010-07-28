@@ -8,10 +8,10 @@ CPLEXDIR = /usr/local/ilog/cplex121
 
 TARGET=ilp_dist
 
-_DEPS = ilp.h
+_DEPS = ilp.h prob.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o ilp.o
+_OBJ = main.o ilp.o prob.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 CFLAGS=-DIL_STD -O -DNDEBUG -I$(IDIR) -I$(CPLEXDIR)/include	\

@@ -4,93 +4,12 @@
 
 #include "../include/ilp.h"
 
-/* Constructor */
-ILP::ILP(int *P, int n, const char *bt)
-{
-	perm = new int[n];
-	perm_size = n;
-
-	for (int i = 0; i < perm_size; i++) {
-		perm[i] = P[i];
-	}
-
-	btype = new char[strlen(bt)+1];
-	strcpy((char *) btype, bt);
-
-	return;
-}
-
 /* Destructor */
 ILP::~ILP()
 {
 	delete[] perm;
 	delete[] btype;
 }
-
-/* 
- * get_bound: Returns the model for the model bt.
- */
-void ILP::get_bound(int P[], int n, const char *bt, 
-		   int &lb, int &ub)
-{
-	if (strcmp(bt, DEF) == 0) {
-		lb = 0;
-		ub = n;
-	}
-	else if (strcmp(bt, REV_BR) == 0) {
-		/*TODO*/
-		lb = 0;
-		ub = n;
-	}
-	else if (strcmp(bt, TRA_BR) == 0) {
-		/*TODO*/
-		lb = 0;
-		ub = n;
-	}
-	else if (strcmp(bt, T_R_BR) == 0) {
-		/*TODO*/
-		lb = 0;
-		ub = n;
-	}
-
-	return;
-} /* get_bound */
-
-/*
- * permutation: Verify if the given array is a permutation.
- */
-int ILP::permutation(int P[], int n)
-{
-	int *num = new int[n];
-
-	memset(num, 0, n*sizeof(int));
-
-	for (int i = 0; i < n; i++) {
-		if (num[P[i]] != 0) {
-			return FAILURE;
-		}
-		num[P[i]] ++;
-	}
-
-	delete[] num;
-
-	return SUCCESS;
-} /* permutation */
-
-/*
- * is_identity: Verify if the given array is the identity 
- * permutation.
- */
-int ILP::is_identity(int P[], int n)
-{
-	for (int i = 0; i < n; i ++) {
-		if (P[i] != i+1) {
-			return FAILURE;
-		}
-	}
-
-	return SUCCESS;
-} /* is_identity */
 
 /*
  * trans_dist
