@@ -21,21 +21,22 @@ void usage(const char name[])
 	cout << name << " <m> <b> <p>\n\n";
 
 	cout << "- m is the model for the problem.\n";
-	cout << "* trans     - sorting by transposition.\n";
-	cout << "* rev       - sorting by reversal.\n";
-	cout << "* trans_rev - sorting by transpositions+reversals.\n";
+	cout << "* " << TRA << "     - sorting by transposition.\n";
+	cout << "* " << REV << "       - sorting by reversal.\n";
+	cout << "* " << T_R << " - sorting by transpositions+reversals.\n";
 	cout << "\n";
 
 	cout << "- b is the type of bounds for the problem.\n";
-	cout << "* def    - default bound.\n";
-	cout << "* rev_br - reversal breakpoint bound.\n";
-	cout << "* tra_br - transposition breakpoint bound.\n";
-	cout << "* t_r_br - transposition+reversal breakpoint bound.\n";
+	cout << "* " << DEF << "    - default bound.\n";
+	cout << "* " << REV_BR << " - reversal breakpoint bound.\n";
+	cout << "* " << TRA_BR << " - transposition breakpoint bound.\n";
+	cout << "* " << T_R_BR << " - transposition+reversal breakpoint bound.\n";
 	cout << "\n";
 
 	cout << "- p is the given permutation.\n";
 	cout << "* Ex: \"1 2 3 4\".\n";
 	cout << "\n";
+
 
 	return;
 
