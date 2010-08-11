@@ -4,11 +4,15 @@
 
 #include "../include/ilp.h"
 
+/* Constructor */
+ILP::ILP(int *P, int n, const char *bt):
+	Prob(P, n, bt) {}
+
+
 /* Destructor */
 ILP::~ILP()
 {
-	delete[] perm;
-	delete[] btype;
+	/* Using the destructor from Prob */
 }
 
 /*

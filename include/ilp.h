@@ -11,7 +11,7 @@
 class ILP: public Prob {
  public:
 	/* Constructor */
- ILP(int *P, int n, const char *bt):Prob(P, n, bt) {};
+	ILP(int *, int, const char *);
 	/* Destructor */
 	~ILP();
 
