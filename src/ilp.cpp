@@ -423,7 +423,7 @@ int ILP::rev_dist(int P[], int n, const char *bt)
 		model.add(obj <= ub);
 		model.add(obj >= lb);
 
-		model.add(IloMinimize(env, obj));
+ 		model.add(IloMinimize(env, obj));
 		obj.end();
 
 		/* Solving the problem */
