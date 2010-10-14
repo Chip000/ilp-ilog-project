@@ -413,18 +413,15 @@ int ILP::rev_dist(int P[], int n, const char *bt)
 		/* End Reversal Constraints */
 
 		/* Bounds */
-		for (k = 1; k < n; k++) {
-			model.add(RD[k] * k <= ub);
-			model.add(RD[k] * n + k - 1 >= lb);
-		}
-		/* End Constraints */
-
 		/* objective function */
 		IloExpr obj(env);
 
 		for (k = 1; k < n; k++) {
 			obj += RD[k];
 		}
+
+		model.add(obj <= ub);
+		model.add(obj >= lb);
 
 		model.add(IloMinimize(env, obj));
 		obj.end();
@@ -729,17 +726,15 @@ int ILP::trans_rev_dist(int P[], int n, const char *bt)
 		/* End Transposition+Reversal Constraints */
 
 		/* Bounds */
-		for (k = 1; k < n; k++) {
-			model.add(RD[k] * k <= ub);
-			model.add(RD[k] * n + k - 1 >= lb);
-		}
-
 		/* objective function */
 		IloExpr obj(env);
 
 		for (k = 1; k < n; k++) {
 			obj += ZD[k];
 		}
+
+		model.add(obj <= ub);
+		model.add(obj >= lb);
 
 		model.add(IloMinimize(env, obj));
 		obj.end();
