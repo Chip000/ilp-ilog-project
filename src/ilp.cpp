@@ -225,17 +225,23 @@ int ILP::trans_dist(int P[], int n, const char *bt)
 		}
 
 		model.add(IloMinimize(env, obj));
-		obj.end();
 
 		/* Solving the problem */
 		IloCplex cplex(env);
 		cplex.extract(model);
 		if (cplex.solve()) {
+			dist = 0;
+			for (k = 1; k < n; k++) {
+				dist += ((cplex.getValue(TD[k]) > 0) ? 1 : 0);
+
+			}
 			cplex.out() << std::endl ;
 			cplex.out() << "Optimal value: ";
-			dist = cplex.getObjValue();
 			cplex.out() <<  dist << std::endl;
 		}
+
+
+		obj.end();
 	}
 	catch (IloException &ex) {
 		env.out() << "Error: " << ex.getMessage() << std::endl;
@@ -424,17 +430,22 @@ int ILP::rev_dist(int P[], int n, const char *bt)
 		model.add(obj >= lb);
 
  		model.add(IloMinimize(env, obj));
-		obj.end();
 
 		/* Solving the problem */
 		IloCplex cplex(env);
 		cplex.extract(model);
 		if (cplex.solve()) {
+			dist = 0;
+			for (k = 1; k < n; k++) {
+				dist += ((cplex.getValue(RD[k]) > 0) ? 1 : 0);
+
+			}
 			cplex.out() << std::endl ;
 			cplex.out() << "Optimal value: ";
-			dist = cplex.getObjValue();
 			cplex.out() <<  dist << std::endl;
 		}
+
+		obj.end();
 	}
 	catch (IloException &ex) {
 		env.out() << "Error: " << ex.getMessage() << std::endl;
@@ -737,17 +748,22 @@ int ILP::trans_rev_dist(int P[], int n, const char *bt)
 		model.add(obj >= lb);
 
 		model.add(IloMinimize(env, obj));
-		obj.end();
 
 		/* Solving the problem */
 		IloCplex cplex(env);
 		cplex.extract(model);
 		if (cplex.solve()) {
+			dist = 0;
+			for (k = 1; k < n; k++) {
+				dist += ((cplex.getValue(ZD[k]) > 0) ? 1 : 0);
+
+			}
 			cplex.out() << std::endl ;
 			cplex.out() << "Optimal value: ";
-			dist = cplex.getObjValue();
 			cplex.out() <<  dist << std::endl;
 		}
+
+		obj.end();
 	}
 	catch (IloException &ex) {
 		env.out() << "Error: " << ex.getMessage() << std::endl;
