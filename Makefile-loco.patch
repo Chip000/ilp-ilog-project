@@ -1,5 +1,5 @@
---- Makefile	2010-09-01 16:05:45.000000000 -0300
-+++ Makefile.old	2010-09-01 16:08:46.000000000 -0300
+--- Makefile	2010-08-11 16:35:31.000000000 -0300
++++ Makefile.new	2011-10-14 06:14:01.575857490 -0300
 @@ -3,8 +3,8 @@
  ODIR=./obj
  VPATH=./src
@@ -11,3 +11,35 @@
  
  TARGET=ilp_dist
  
+@@ -14,12 +14,12 @@
+ _OBJ = main.o ilp.o prob.o
+ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+ 
+-CFLAGS=-DIL_STD -O -DNDEBUG -I$(IDIR) -I$(CPLEXDIR)/include	\
+--I$(CONCERTDIR)/include -fstrict-aliasing -pedantic -g -Wall		\
++CFLAGS=-DIL_STD -O -DNDEBUG -I$(IDIR) -I$(CPLEXDIR)/include     \
++-I$(CONCERTDIR)/include -fstrict-aliasing -pedantic -g -Wall            \
+ -fexceptions -ffloat-store -DILOUSEMT -D_REENTRANT -DILM_REENTRANT
+ 
+-LDFLAGS = -L$(CPLEXDIR)/lib/x86-64_debian4.0_4.1/static_pic \
+--lilocplex -lcplex -L$(CONCERTDIR)/lib/x86-64_debian4.0_4.1/static_pic \
++LDFLAGS = -L$(CPLEXDIR)/lib/x86_debian4.0_4.1/static_pic \
++-lilocplex -lcplex -L$(CONCERTDIR)/lib/x86_debian4.0_4.1/static_pic \
+ -lconcert -lm -lpthread
+ 
+ .PHONY: all clean
+@@ -27,10 +27,10 @@
+ all: $(TARGET)
+ 
+ $(ODIR)/%.o: %.cpp $(DEPS)
+-	$(CC) -c -o $@ $< $(CFLAGS) $(LDFLAGS)
++        $(CC) -c -o $@ $< $(CFLAGS) $(LDFLAGS)
+ 
+ $(TARGET): $(OBJ)
+-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
++        $(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+ 
+ clean:
+-	rm -f $(ODIR)/*.o *~ $(IDIR)/*~ $(TARGET)
+\ No newline at end of file
++        rm -f $(ODIR)/*.o *~ $(IDIR)/*~ $(TARGET)
